@@ -282,6 +282,8 @@ static int burst_write(const struct device *dev, uint8_t reg, const uint8_t *buf
 }
 
 static int set_cpi(const struct device *dev, uint32_t cpi) {
+    struct pixart_data *data = dev->data;
+
     /* Set resolution with CPI step of 100 cpi
      * 0x00: 100 cpi (minimum cpi)
      * 0x01: 200 cpi
@@ -304,6 +306,8 @@ static int set_cpi(const struct device *dev, uint32_t cpi) {
     int err = reg_write(dev, PMW3360_REG_CONFIG1, value);
     if (err) {
         LOG_ERR("Failed to change CPI");
+    } else {
+        data->curr_cpi = cpi;
     }
 
     return err;
