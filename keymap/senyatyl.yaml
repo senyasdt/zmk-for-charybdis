@@ -35,7 +35,7 @@ layers:
   - ','
   - .
   - /
-  - WINSPACE
+  - '&deferred_mod_layer 12 LEFT_GUI'
   - LEFT GUI
   - {t: '&nav_word 5', h: '&num_word_backspace 2'}
   - SPACE
@@ -563,10 +563,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - Gui+SPACE
+  - {t: ▽, type: trans}
+  - '&deferred_mod_tap SPACE'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
