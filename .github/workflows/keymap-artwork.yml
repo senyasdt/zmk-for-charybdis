@@ -19,7 +19,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pipx install keymap-drawer==0.22.0
+          pipx install keymap-drawer
           pipx install west
 
       - name: Fetch west modules
