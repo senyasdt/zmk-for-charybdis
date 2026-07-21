@@ -35,7 +35,7 @@ layers:
   - ','
   - .
   - /
-  - LEFT GUI
+  - WINSPACE
   - LEFT GUI
   - {t: '&nav_word 5', h: '&num_word_backspace 2'}
   - SPACE
@@ -528,7 +528,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - ''
-  '12':
+  WINSPACE:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -563,10 +563,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Gui+SPACE
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
