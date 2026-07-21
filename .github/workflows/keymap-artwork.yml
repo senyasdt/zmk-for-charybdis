@@ -43,6 +43,13 @@ jobs:
 
           for keymap_file in config/*.keymap; do
             keyboard="$(basename "$keymap_file" .keymap)"
+            dts_layout="config/boards/shields/$keyboard/$keyboard.dtsi"
+            draw_args=()
+
+            if [[ -f "$dts_layout" ]]; then
+              draw_args=(-d "$dts_layout" -l physical_layout_0)
+            fi
+
             echo "Drawing $keyboard"
             tmp_yaml="$(mktemp)"
             tmp_svg="$(mktemp)"
@@ -50,7 +57,7 @@ jobs:
             keymap "${config_arg[@]}" parse -z "$keymap_file" > "$tmp_yaml"
             mv "$tmp_yaml" "keymap/$keyboard.yaml"
 
-            keymap "${config_arg[@]}" draw "keymap/$keyboard.yaml" > "$tmp_svg"
+            keymap "${config_arg[@]}" draw "${draw_args[@]}" "keymap/$keyboard.yaml" > "$tmp_svg"
             mv "$tmp_svg" "keymap/$keyboard.svg"
           done
 
