@@ -35,7 +35,7 @@ layers:
   - ','
   - .
   - /
-  - ''
+  - LEFT GUI
   - LEFT GUI
   - {t: '&nav_word 5', h: '&num_word_backspace 2'}
   - SPACE
