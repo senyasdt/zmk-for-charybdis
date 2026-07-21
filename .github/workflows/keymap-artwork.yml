@@ -80,7 +80,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet -- keymap; then
+          if [[ -z "$(git status --porcelain -- keymap)" ]]; then
             echo "No keymap artwork changes"
             exit 0
           fi
