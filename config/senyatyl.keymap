@@ -1,6 +1,7 @@
 #include <dt-bindings/zmk/mouse.h>
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <behaviors/deferred_mod.dtsi>
 #include <behaviors/num_word.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -368,7 +369,7 @@
 &kp LEFT_SHIFT  &kp Q  &kp W  &kp E         &kp R               &kp T             &kp Y  &kp U                      &kp I        &kp O       &kp P     &kp SQT
 &kp LCTRL       &kp A  &kp S  &kp D         &kp F               &kp G             &kp H  &kp J                      &kp K        &kp L       &kp SEMI  &kp ESC
                 &kp Z  &kp X  &kp C         &kp V               &kp B             &kp N  &kp M                      &kp COMMA    &kp PERIOD  &kp FSLH
-                       &mo 12  &kp LEFT_GUI  &smart_num_nav 2 5         &kp SPACE         &smart_sym_alt LEFT_ALT 1  &lt 3 ENTER  &none
+                       &deferred_mod_layer 12 LEFT_GUI  &kp LEFT_GUI  &smart_num_nav 2 5         &kp SPACE         &smart_sym_alt LEFT_ALT 1  &lt 3 ENTER  &none
                               &kp DEL       &kp TAB
             >;
         };
@@ -500,7 +501,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans
         &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans          &kp LG(SPACE)          &trans  &trans  &trans
+                &trans  &trans  &trans          &deferred_mod_tap SPACE          &trans  &trans  &trans
                         &trans  &none
             >;
         };
