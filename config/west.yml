@@ -30,7 +30,7 @@ manifest:
       revision: v0.3
     - name: zmk-deferred-mod
       remote: senyasdt
-      revision: 91c7524db96bd40603625b41a576d4ac5629a951
+      revision: 2a368e48a344be577773d7e99400bfd69daccbaa
     - name: zmk-raw-hid
       remote: zzeneg
       revision: main
