@@ -4,12 +4,16 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: DoctorWangWang
       url-base: https://github.com/DoctorWangWang
+    - name: KOHSUK
+      url-base: https://github.com/KOHSUK
     - name: urob
       url-base: https://github.com/urob
     - name: zzeneg
       url-base: https://github.com/zzeneg
     - name: senyasdt
       url-base: https://github.com/senyasdt
+    - name: carrefinho
+      url-base: https://github.com/carrefinho
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -18,6 +22,9 @@ manifest:
     - name: zmk-pmw3610-driver
       remote: DoctorWangWang
       revision: main
+    - name: zmk-pmw3360-driver
+      remote: senyasdt
+      revision: 8dfd89fcefbc52846b5d530a3de05109da28ca7a
     - name: zmk-auto-layer
       remote: urob
       revision: v0.3
@@ -27,6 +34,9 @@ manifest:
     - name: zmk-yasb
       remote: senyasdt
       revision: 1682a5a2c0e061eccfb6618bb6042b21ef887077
+    - name: prospector-zmk-module
+      remote: carrefinho
+      revision: main
       
   self:
     path: config

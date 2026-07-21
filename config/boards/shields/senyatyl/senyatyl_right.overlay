@@ -1,0 +1,107 @@
+#include "senyatyl.dtsi"
+#include <dt-bindings/zmk/input_transform.h>
+
+&default_transform {
+    col-offset = <6>;
+};
+
+&kscan0 {
+    diode-direction = "col2row";
+
+    col-gpios
+        = <&gpio1 4  GPIO_ACTIVE_HIGH> /* D8 */
+        , <&gpio1 6  GPIO_ACTIVE_HIGH> /* D9 */
+        , <&gpio0 9  GPIO_ACTIVE_HIGH> /* D10 */
+        , <&gpio0 10 GPIO_ACTIVE_HIGH> /* D16 */
+        , <&gpio1 11 GPIO_ACTIVE_HIGH> /* D14 */
+        , <&gpio1 13 GPIO_ACTIVE_HIGH> /* D15 */
+        ;
+
+    row-gpios
+        = <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* D21 */
+        , <&gpio0 29 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* D20 */
+        , <&gpio0 2  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* D19 */
+        , <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> /* D18 */
+        ;
+};
+
+&gpio0 {
+    ext_power_force_on: ext_power_force_on {
+        gpio-hog;
+        gpios = <13 GPIO_ACTIVE_HIGH>;
+        output-high;
+    };
+
+    pmw3360_reset_hog: pmw3360_reset_hog {
+        gpio-hog;
+        gpios = <11 GPIO_ACTIVE_HIGH>; /* D7 */
+        output-high;
+    };
+};
+
+&{/EXT_POWER} {
+    status = "disabled";
+};
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,  /* D3 */
+                <NRF_PSEL(SPIM_MOSI, 0, 22)>,     /* D4 */
+                <NRF_PSEL(SPIM_MISO, 0, 24)>;     /* D5 */
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,  /* D3 */
+                <NRF_PSEL(SPIM_MOSI, 0, 22)>,     /* D4 */
+                <NRF_PSEL(SPIM_MISO, 0, 24)>;     /* D5 */
+            low-power-enable;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&gpio1 0 GPIO_ACTIVE_LOW>; /* D6 */
+
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,pmw3360";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* D2 */
+    };
+};
+
+/ {
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        input-processors = <&zip_temp_layer 8 750>;
+
+        mouse_slow {
+            layers = <9>;
+            input-processors = <&zip_xy_scaler 1 2>;
+        };
+
+        mouse_fast {
+            layers = <10>;
+            input-processors = <&zip_xy_scaler 2 1>;
+        };
+
+        mouse_scroll {
+            layers = <11>;
+            input-processors = <
+                &zip_xy_scaler 1 15
+                &zip_xy_to_scroll_mapper
+                &zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)
+            >;
+        };
+    };
+};

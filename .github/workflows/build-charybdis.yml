@@ -1,4 +1,4 @@
-name: Firmware Build
+name: Charybdis Firmware Build
 
 on:
   push:
@@ -10,3 +10,6 @@ on:
 jobs:
   firmware:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3.0
+    with:
+      build_matrix_path: builds/charybdis.yaml
+      archive_name: charybdis-firmware
