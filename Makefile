@@ -4,7 +4,7 @@ DOCKER_RUN ?= docker run --rm -it -v "$(CURDIR):/workdir" -w /workdir $(DOCKER_I
 BOARD ?= nice_nano_v2
 ZMK_CONFIG ?= $(CURDIR)/config
 
-.PHONY: docker-image shell west-init build-left build-right build-right-peripheral build-dongle build-reset build-senyatyl-left build-senyatyl-right build-senyatyl-right-peripheral build-senyatyl-right-nomouse build-senyatyl-right-col2row build-senyatyl-all build-all clean
+.PHONY: docker-image shell west-init build-left build-right build-right-peripheral build-dongle build-reset build-senyatyl-left build-senyatyl-right build-senyatyl-right-peripheral build-senyatyl-right-nomouse build-senyatyl-right-col2row build-senyatyl-all build-eyelash-corne-left build-eyelash-corne-right build-eyelash-corne-studio-left build-eyelash-corne-reset-left build-eyelash-corne-reset-right build-eyelash-corne-all build-all clean
 
 docker-image:
 	docker build -t $(DOCKER_IMAGE) .
@@ -50,13 +50,31 @@ build-senyatyl-right-col2row: docker-image
 build-senyatyl-all: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-all
 
+build-eyelash-corne-left: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-left
+
+build-eyelash-corne-right: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-right
+
+build-eyelash-corne-studio-left: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-studio-left
+
+build-eyelash-corne-reset-left: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-reset-left
+
+build-eyelash-corne-reset-right: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-reset-right
+
+build-eyelash-corne-all: docker-image
+	$(DOCKER_RUN) make _build-eyelash-corne-all
+
 build-all: docker-image
 	$(DOCKER_RUN) make _build-all
 
 clean:
 	rm -rf build
 
-.PHONY: _build-left _build-right _build-right-peripheral _build-dongle _build-reset _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row _build-senyatyl-all _build-all
+.PHONY: _build-left _build-right _build-right-peripheral _build-dongle _build-reset _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row _build-senyatyl-all _build-eyelash-corne-left _build-eyelash-corne-right _build-eyelash-corne-studio-left _build-eyelash-corne-reset-left _build-eyelash-corne-reset-right _build-eyelash-corne-all _build-all
 
 _build-left: west-init
 	west build -p always -s zmk/app -d build/charybdis_left -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=charybdis_left
@@ -89,5 +107,22 @@ _build-senyatyl-right-col2row: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_col2row -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_col2row
 
 _build-senyatyl-all: _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row
+
+_build-eyelash-corne-left: west-init
+	west build -p always -s zmk/app -d build/eyelash_corne_left -b eyelash_corne_left -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=nice_view
+
+_build-eyelash-corne-right: west-init
+	west build -p always -s zmk/app -d build/eyelash_corne_right -b eyelash_corne_right -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=nice_view
+
+_build-eyelash-corne-studio-left: west-init
+	west build -p always -s zmk/app -d build/eyelash_corne_studio_left -b eyelash_corne_left -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=nice_view -DSNIPPET=studio-rpc-usb-uart -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+
+_build-eyelash-corne-reset-left: west-init
+	west build -p always -s zmk/app -d build/eyelash_corne_reset_left -b eyelash_corne_left -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=settings_reset
+
+_build-eyelash-corne-reset-right: west-init
+	west build -p always -s zmk/app -d build/eyelash_corne_reset_right -b eyelash_corne_right -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=settings_reset
+
+_build-eyelash-corne-all: _build-eyelash-corne-left _build-eyelash-corne-right _build-eyelash-corne-studio-left _build-eyelash-corne-reset-left _build-eyelash-corne-reset-right
 
 _build-all: _build-left _build-right _build-right-peripheral _build-dongle _build-reset

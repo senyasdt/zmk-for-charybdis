@@ -43,11 +43,25 @@ jobs:
 
           for keymap_file in config/*.keymap; do
             keyboard="$(basename "$keymap_file" .keymap)"
-            dts_layout="config/boards/shields/$keyboard/$keyboard.dtsi"
+            dts_layout=""
+            layout_name="physical_layout_0"
             draw_args=()
 
-            if [[ -f "$dts_layout" ]]; then
-              draw_args=(-d "$dts_layout" -l physical_layout_0)
+            for candidate in \
+              "config/boards/shields/$keyboard/$keyboard.dtsi" \
+              "config/boards/arm/$keyboard/$keyboard-layouts.dtsi" \
+              "config/boards/arm/$keyboard/$keyboard.dtsi"; do
+              if [[ -f "$candidate" ]]; then
+                dts_layout="$candidate"
+                if [[ "$candidate" == config/boards/arm/* ]]; then
+                  layout_name="default_layout"
+                fi
+                break
+              fi
+            done
+
+            if [[ -n "$dts_layout" ]]; then
+              draw_args=(-d "$dts_layout" -l "$layout_name")
             fi
 
             echo "Drawing $keyboard"
