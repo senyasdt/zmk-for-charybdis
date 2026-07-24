@@ -80,12 +80,12 @@ layers:
   - )
   - AltGr+/
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: SYMBOLS, h: toggle}
   - SPACE
-  - ''
+  - {t: ▽, type: trans}
   - ENTER
-  - ''
-  - ''
+  - {t: ▽, type: trans}
   - ''
   - ''
   NUMBERS:
@@ -174,7 +174,7 @@ layers:
   - {t: ▽, type: trans}
   - {type: held}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
   - ''
   MANAGER:
   - {t: ▽, type: trans}
@@ -256,10 +256,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: NAV, h: toggle}
-  - ''
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - STACK
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -303,7 +303,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -343,13 +343,13 @@ layers:
   - ''
   - ''
   - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - ''
   - ''
   MOUSE:
@@ -575,7 +575,7 @@ layers:
 combos:
 - p: [1, 14, 25]
   k: '&soft_off'
-- p: [35, 39]
+- p: [36, 38]
   k: '&caps_word'
   l: [QWERTY]
 - p: [4, 5]
@@ -596,19 +596,19 @@ combos:
 - p: [30, 30, 29]
   k: '}'
   l: [QWERTY]
-- p: [1, 2]
+- p: [25, 26]
   k: ESC
   l: [QWERTY]
-- p: [0, 5, 35]
+- p: [0, 5, 36]
   k: {t: UTIL, h: toggle}
   l: [QWERTY]
-- p: [6, 11, 39]
+- p: [6, 11, 38]
   k: {t: UTIL, h: toggle}
   l: [QWERTY]
-- p: [0, 5, 35]
+- p: [0, 5, 36]
   k: {t: UTIL, h: toggle}
   l: [UTIL]
-- p: [6, 11, 39]
+- p: [6, 11, 38]
   k: {t: UTIL, h: toggle}
   l: [UTIL]
 - p: [2, 3, 4]
@@ -637,9 +637,6 @@ combos:
   l: [QWERTY]
 - p: [3, 4]
   k: Z
-  l: [QWERTY]
-- p: [2, 3, 4]
-  k: DEL
   l: [QWERTY]
 - p: [4, 16]
   k: '&gth'
