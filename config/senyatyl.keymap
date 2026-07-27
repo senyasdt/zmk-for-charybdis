@@ -382,10 +382,10 @@
         layer_2 {
             display-name = "NUMBERS";
             bindings = <
-&trans  &kp PLUS  &kp ASTERISK  &kp J      &kp K   &kp PRCNT             &kp MINUS  &trans     &kp MINUS  &trans    &kp EQUAL  &trans
-&trans  &kp N1    &kp N2        &kp N3     &kp N4  &kp SLASH             &kp COLON  &kp N7     &kp N8     &kp N9    &kp N0     &trans
-        &kp DQT   &trans        &kp LS(G)  &kp N5  &kp V                 &kp W      &kp N6     &kp LPAR   &kp RPAR  &trans
-                  &trans        &trans     &to 0              &kp SPACE             &kp ENTER  &none      &none
+&trans  &kp PLUS  &kp ASTERISK  &kp J      &kp K   &kp PRCNT             &kp MINUS  &trans  &kp MINUS  &trans    &kp EQUAL  &trans
+&trans  &kp N1    &kp N2        &kp N3     &kp N4  &kp SLASH             &kp COLON  &kp N7  &kp N8     &kp N9    &kp N0     &trans
+        &kp DQT   &trans        &kp LS(G)  &kp N5  &kp V                 &kp W      &kp N6  &kp LPAR   &kp RPAR  &trans
+                  &trans        &trans     &to 0              &kp SPACE             &none   &kp ENTER  &none
                                 &kp SPACE  &none
             >;
         };
@@ -396,7 +396,7 @@
 &trans  &trans      &trans      &trans  &trans  &trans          &kp C_PREVIOUS  &kp C_NEXT  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &kp C_MUTE  &trans
 &trans  &kp F1      &kp F2      &kp F3  &kp F4  &kp F6          &trans          &kp F8      &kp F9             &kp F10          &kp F11     &kp F12
         &bt BT_PRV  &bt BT_NXT  &trans  &kp F5  &trans          &trans          &kp F7      &trans             &trans           &trans
-                    &trans      &trans  &to 0           &trans                  &trans      &trans             &trans
+                    &trans      &trans  &to 0           &trans                  &none       &kp ENTER          &trans
                                 &none   &none
             >;
         };
