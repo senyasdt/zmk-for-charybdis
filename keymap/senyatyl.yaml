@@ -127,8 +127,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: QWERTY, h: toggle}
   - SPACE
-  - ENTER
   - ''
+  - ENTER
   - ''
   - SPACE
   - ''
@@ -171,8 +171,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: QWERTY, h: toggle}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {type: held}
+  - ''
+  - {t: ENTER, type: held}
   - {t: ▽, type: trans}
   - ''
   - ''
