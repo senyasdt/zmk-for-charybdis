@@ -22,3 +22,6 @@ include:
   - board: seeeduino_xiao_ble
     shield: senyatyl_dongle prospector_adapter
     artifact-name: senyatyl_dongle-seeeduino_xiao_ble-zmk
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
+    artifact-name: settings_reset-seeeduino_xiao_ble-zmk

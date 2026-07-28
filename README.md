@@ -17,6 +17,7 @@ make build-dongle
 make build-senyatyl-dongle
 make build-senyatyl-all
 make build-reset
+make build-reset-xiao
 make shell
 make clean
 ```
@@ -40,9 +41,22 @@ For Senyatyl, build locally with:
 make build-senyatyl-dongle
 ```
 
-After flashing the dongle, pair the keyboard halves as peripherals. Pair the
-left half first and the right half second so Prospector's peripheral battery
-widgets are ordered left-to-right.
+The Senyatyl dongle is configured for two BLE split peripherals. Flash the
+halves with `senyatyl_left` and `senyatyl_right_peripheral`; do not use the
+regular `senyatyl_right` firmware with the dongle, because that build is a
+right-half central.
+
+When switching an existing keyboard from right-half central to dongle central,
+reset BLE settings on all controllers first:
+
+1. Flash `settings_reset-nice_nano_v2-zmk` to the left half.
+2. Flash `settings_reset-nice_nano_v2-zmk` to the right half.
+3. Flash `settings_reset-seeeduino_xiao_ble-zmk` to the Prospector dongle.
+4. Remove the old keyboard pairing from the host OS.
+5. Flash `senyatyl_left`, `senyatyl_right_peripheral`, and
+   `senyatyl_dongle-seeeduino_xiao_ble-zmk`.
+6. Pair the left half first and the right half second so Prospector's peripheral
+   battery widgets are ordered left-to-right.
 
 ## Senyatyl Layout
 
