@@ -1,0 +1,18 @@
+#include "senyatyl.dtsi"
+
+/ {
+    splits {
+        #address-cells = <1>;
+        #size-cells = <0>;
+    };
+};
+
+&kscan0 {
+    compatible = "zmk,kscan-mock";
+    rows = <5>;
+    columns = <12>;
+    events = <>;
+
+    /delete-property/ diode-direction;
+    /delete-property/ row-gpios;
+};
