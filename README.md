@@ -15,6 +15,7 @@ make build-left
 make build-right
 make build-dongle
 make build-senyatyl-dongle
+make build-senyatyl-dongle-debug
 make build-senyatyl-all
 make build-reset
 make build-reset-xiao
@@ -41,6 +42,15 @@ For Senyatyl, build locally with:
 make build-senyatyl-dongle
 ```
 
+For USB logs from the dongle, build or download the debug artifact:
+
+```sh
+make build-senyatyl-dongle-debug
+```
+
+Local output: `build/senyatyl_dongle_debug/zephyr/zmk.uf2`.
+GitHub Actions artifact: `senyatyl_dongle_debug-seeeduino_xiao_ble-zmk`.
+
 The Senyatyl dongle is configured for two BLE split peripherals. Flash the
 halves with `senyatyl_left` and `senyatyl_right_peripheral`; do not use the
 regular `senyatyl_right` firmware with the dongle, because that build is a
@@ -57,6 +67,17 @@ reset BLE settings on all controllers first:
    `senyatyl_dongle-seeeduino_xiao_ble-zmk`.
 6. Pair the left half first and the right half second so Prospector's peripheral
    battery widgets are ordered left-to-right.
+
+If Prospector shows `N/A` or red crosses for both halves, the dongle is not
+connected to either split peripheral. Flash the debug dongle firmware, open its
+USB serial log, then power-cycle both halves and look for:
+
+- `Scanning successfully started`: dongle central is scanning for halves.
+- `[DEVICE]`: dongle sees nearby BLE advertisements.
+- `Found the split service`: an advertising half exposes the ZMK split service.
+- `Connected`: the dongle connected to a split peripheral.
+- `Unable to reserve peripheral slot` or `Create conn failed`: likely stale
+  bonding or a central slot problem; repeat the full settings reset flow.
 
 ## Senyatyl Layout
 
