@@ -89,7 +89,8 @@ the half debug artifacts one at a time and read their USB serial logs:
 
 The half logs should show BLE startup and split peripheral advertising. If a
 half debug build does not expose a USB serial port, it is not the flashed
-firmware currently running on that controller.
+firmware currently running on that controller. The debug probe logs a heartbeat
+like `Senyatyl split peripheral debug: connected=0 bonded=0` every two seconds.
 
 ## Senyatyl Layout
 

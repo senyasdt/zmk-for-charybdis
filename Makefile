@@ -95,7 +95,7 @@ _build-senyatyl-left: west-init
 	west build -p always -s zmk/app -d build/senyatyl_left -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_left
 
 _build-senyatyl-left-debug: west-init
-	west build -p always -s zmk/app -d build/senyatyl_left_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_left -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768
+	west build -p always -s zmk/app -d build/senyatyl_left_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_left -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768 -DCONFIG_SENYATYL_DEBUG_PROBE=y
 
 _build-senyatyl-right: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right
@@ -104,7 +104,7 @@ _build-senyatyl-right-peripheral: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_peripheral -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_peripheral
 
 _build-senyatyl-right-peripheral-debug: west-init
-	west build -p always -s zmk/app -d build/senyatyl_right_peripheral_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_peripheral -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768
+	west build -p always -s zmk/app -d build/senyatyl_right_peripheral_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_peripheral -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768 -DCONFIG_SENYATYL_DEBUG_PROBE=y
 
 _build-senyatyl-right-nomouse: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_nomouse -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_nomouse
