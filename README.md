@@ -16,6 +16,8 @@ make build-right
 make build-dongle
 make build-senyatyl-dongle
 make build-senyatyl-dongle-debug
+make build-senyatyl-left-debug
+make build-senyatyl-right-peripheral-debug
 make build-senyatyl-all
 make build-reset
 make build-reset-xiao
@@ -78,6 +80,16 @@ USB serial log, then power-cycle both halves and look for:
 - `Connected`: the dongle connected to a split peripheral.
 - `Unable to reserve peripheral slot` or `Create conn failed`: likely stale
   bonding or a central slot problem; repeat the full settings reset flow.
+
+If the dongle sees BLE devices but never logs `Found the split service`, flash
+the half debug artifacts one at a time and read their USB serial logs:
+
+- `senyatyl_left_debug-nice_nano_v2-zmk`
+- `senyatyl_right_peripheral_debug-nice_nano_v2-zmk`
+
+The half logs should show BLE startup and split peripheral advertising. If a
+half debug build does not expose a USB serial port, it is not the flashed
+firmware currently running on that controller.
 
 ## Senyatyl Layout
 
