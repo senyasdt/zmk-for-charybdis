@@ -4,7 +4,7 @@ DOCKER_RUN ?= docker run --rm -it -v "$(CURDIR):/workdir" -w /workdir $(DOCKER_I
 BOARD ?= nice_nano_v2
 ZMK_CONFIG ?= $(CURDIR)/config
 
-.PHONY: docker-image shell west-init build-left build-right build-right-peripheral build-dongle build-reset build-reset-xiao build-senyatyl-left build-senyatyl-left-debug build-senyatyl-right build-senyatyl-right-peripheral build-senyatyl-right-peripheral-debug build-senyatyl-right-nomouse build-senyatyl-right-col2row build-senyatyl-dongle build-senyatyl-dongle-debug build-senyatyl-all build-all clean
+.PHONY: docker-image shell west-init build-left build-right build-right-peripheral build-dongle build-reset build-senyatyl-left build-senyatyl-right build-senyatyl-right-peripheral build-senyatyl-right-nomouse build-senyatyl-right-col2row build-senyatyl-all build-all clean
 
 docker-image:
 	docker build -t $(DOCKER_IMAGE) .
@@ -32,14 +32,8 @@ build-dongle: docker-image
 build-reset: docker-image
 	$(DOCKER_RUN) make _build-reset
 
-build-reset-xiao: docker-image
-	$(DOCKER_RUN) make _build-reset-xiao
-
 build-senyatyl-left: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-left
-
-build-senyatyl-left-debug: docker-image
-	$(DOCKER_RUN) make _build-senyatyl-left-debug
 
 build-senyatyl-right: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-right
@@ -47,20 +41,11 @@ build-senyatyl-right: docker-image
 build-senyatyl-right-peripheral: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-right-peripheral
 
-build-senyatyl-right-peripheral-debug: docker-image
-	$(DOCKER_RUN) make _build-senyatyl-right-peripheral-debug
-
 build-senyatyl-right-nomouse: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-right-nomouse
 
 build-senyatyl-right-col2row: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-right-col2row
-
-build-senyatyl-dongle: docker-image
-	$(DOCKER_RUN) make _build-senyatyl-dongle
-
-build-senyatyl-dongle-debug: docker-image
-	$(DOCKER_RUN) make _build-senyatyl-dongle-debug
 
 build-senyatyl-all: docker-image
 	$(DOCKER_RUN) make _build-senyatyl-all
@@ -71,7 +56,7 @@ build-all: docker-image
 clean:
 	rm -rf build
 
-.PHONY: _build-left _build-right _build-right-peripheral _build-dongle _build-reset _build-reset-xiao _build-senyatyl-left _build-senyatyl-left-debug _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-peripheral-debug _build-senyatyl-right-nomouse _build-senyatyl-right-col2row _build-senyatyl-dongle _build-senyatyl-dongle-debug _build-senyatyl-all _build-all
+.PHONY: _build-left _build-right _build-right-peripheral _build-dongle _build-reset _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row _build-senyatyl-all _build-all
 
 _build-left: west-init
 	west build -p always -s zmk/app -d build/charybdis_left -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=charybdis_left
@@ -88,14 +73,8 @@ _build-dongle: west-init
 _build-reset: west-init
 	west build -p always -s zmk/app -d build/settings_reset -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=settings_reset
 
-_build-reset-xiao: west-init
-	west build -p always -s zmk/app -d build/settings_reset_xiao -b seeeduino_xiao_ble -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=settings_reset
-
 _build-senyatyl-left: west-init
 	west build -p always -s zmk/app -d build/senyatyl_left -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_left
-
-_build-senyatyl-left-debug: west-init
-	west build -p always -s zmk/app -d build/senyatyl_left_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_left -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768 -DCONFIG_SENYATYL_DEBUG_PROBE=y
 
 _build-senyatyl-right: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right
@@ -103,21 +82,12 @@ _build-senyatyl-right: west-init
 _build-senyatyl-right-peripheral: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_peripheral -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_peripheral
 
-_build-senyatyl-right-peripheral-debug: west-init
-	west build -p always -s zmk/app -d build/senyatyl_right_peripheral_debug -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_peripheral -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768 -DCONFIG_SENYATYL_DEBUG_PROBE=y
-
 _build-senyatyl-right-nomouse: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_nomouse -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_nomouse
 
 _build-senyatyl-right-col2row: west-init
 	west build -p always -s zmk/app -d build/senyatyl_right_col2row -b $(BOARD) -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD=senyatyl_right_col2row
 
-_build-senyatyl-dongle: west-init
-	west build -p always -s zmk/app -d build/senyatyl_dongle -b seeeduino_xiao_ble -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD="senyatyl_dongle prospector_adapter"
-
-_build-senyatyl-dongle-debug: west-init
-	west build -p always -s zmk/app -d build/senyatyl_dongle_debug -b seeeduino_xiao_ble -- -DZMK_CONFIG=$(ZMK_CONFIG) -DSHIELD="senyatyl_dongle prospector_adapter" -DSNIPPET=zmk-usb-logging -DCONFIG_LOG_BUFFER_SIZE=32768
-
-_build-senyatyl-all: _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row _build-senyatyl-dongle
+_build-senyatyl-all: _build-senyatyl-left _build-senyatyl-right _build-senyatyl-right-peripheral _build-senyatyl-right-nomouse _build-senyatyl-right-col2row
 
 _build-all: _build-left _build-right _build-right-peripheral _build-dongle _build-reset

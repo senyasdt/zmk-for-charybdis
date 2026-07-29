@@ -7,7 +7,3 @@ config SENYATYL_PMW3360_PERIPHERAL_KEYMAP_STUBS
     bool "PMW3360 keymap stubs for Senyatyl split peripheral"
     default y if SHIELD_SENYATYL_RIGHT_PERIPHERAL
     depends on PMW3360 && ZMK_SPLIT && !ZMK_SPLIT_ROLE_CENTRAL
-
-config SENYATYL_DEBUG_PROBE
-    bool "Senyatyl split peripheral debug probe"
-    depends on ZMK_SPLIT && ZMK_SPLIT_BLE && !ZMK_SPLIT_ROLE_CENTRAL

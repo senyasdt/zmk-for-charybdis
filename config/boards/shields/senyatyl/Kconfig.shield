@@ -12,6 +12,3 @@ config SHIELD_SENYATYL_RIGHT_COL2ROW
 
 config SHIELD_SENYATYL_RIGHT_PERIPHERAL
     def_bool $(shields_list_contains,senyatyl_right_peripheral)
-
-config SHIELD_SENYATYL_DONGLE
-    def_bool $(shields_list_contains,senyatyl_dongle)
